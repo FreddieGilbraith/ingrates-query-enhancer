@@ -1,11 +1,11 @@
 {
 	"name": "@little-bonsai/ingrates-query-enhancer",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"sideEffects": false,
 	"description": "An ingrates enhancer to provide queries to actors",
 	"homepage": "https://ingrates.littlebonsai.co.uk/",
-	"license": "MIT",
-	"author": "Freddie Gilbraith <freddie.gilbraith@littlebonsai.co.uk",
+	"license": "ISC",
+	"author": "",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/FreddieGilbraith/ingrates-query-enhancer.git"
@@ -46,8 +46,6 @@
 		"**/*.js": "eslint --fix",
 		"**/*.{css,js,md,json}": "prettier --write"
 	},
-	"author": "",
-	"license": "ISC",
 	"eslintConfig": {
 		"extends": "@little-bonsai"
 	},

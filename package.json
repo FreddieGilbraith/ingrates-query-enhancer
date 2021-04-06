@@ -1,8 +1,15 @@
 {
-	"name": "@little-bonsai/ingrates-query",
+	"name": "@little-bonsai/ingrates-query-enhancer",
 	"version": "0.1.0",
 	"sideEffects": false,
 	"description": "An ingrates enhancer to provide queries to actors",
+	"homepage": "https://ingrates.littlebonsai.co.uk/",
+	"license": "MIT",
+	"author": "Freddie Gilbraith <freddie.gilbraith@littlebonsai.co.uk",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/FreddieGilbraith/ingrates-query-enhancer.git"
+	},
 	"source": "src/index.js",
 	"main": "dist/index.js",
 	"module": "dist/index.module.js",
@@ -42,7 +49,7 @@
 	"author": "",
 	"license": "ISC",
 	"eslintConfig": {
-		"extends": "react-app"
+		"extends": "@little-bonsai"
 	},
 	"prettier": {
 		"tabWidth": 4,
@@ -69,6 +76,7 @@
 		"@babel/cli": "^7.12.1",
 		"@babel/core": "^7.12.3",
 		"@babel/preset-env": "^7.12.1",
+		"@little-bonsai/eslint-config": "^0.1.0",
 		"babel-eslint": "^10.1.0",
 		"babel-jest": "^26.6.2",
 		"babel-polyfill": "^6.26.0",
@@ -87,7 +95,7 @@
 		"prettier": "^2.1.2",
 		"ramda": "^0.27.1"
 	},
-	"dependencies": {
+	"peerDependencies": {
 		"@little-bonsai/ingrates": "^0.5.2"
 	}
 }

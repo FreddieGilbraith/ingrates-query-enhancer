@@ -1,4 +1,4 @@
-export default function queryEnhancer({ self, spawn, dispatch }) {
+export default function queryEnhancer({ spawn }) {
 	function query(snk, msg, timeout = 100) {
 		return new Promise((done, fail) => {
 			function* QueryActor({ self, dispatch }) {

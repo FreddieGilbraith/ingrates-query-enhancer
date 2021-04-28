@@ -14,7 +14,7 @@
 	"main": "dist/index.js",
 	"module": "dist/index.module.js",
 	"unpkg": "dist/index.umd.js",
-	"exports": "./dist/foo.modern.js",
+	"exports": "./dist/index.modern.js",
 	"keywords": [
 		"actor",
 		"actors",
@@ -94,6 +94,6 @@
 		"ramda": "^0.27.1"
 	},
 	"peerDependencies": {
-		"@little-bonsai/ingrates": "^0.5.2"
+		"@little-bonsai/ingrates": "^0.7.0"
 	}
 }

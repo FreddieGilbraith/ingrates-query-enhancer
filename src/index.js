@@ -28,7 +28,7 @@ QueryActor.startup = ({ dispatch }, sendTo, msg) => {
 	dispatch(sendTo, msg);
 };
 
-export default function createQueryEnhancer(defaultTimeout = 5000) {
+export function createQueryEnhancer(defaultTimeout = 5000) {
 	return function queryEnhancer({ spawn, self, name }) {
 		function query(snk, msg, timeout = defaultTimeout) {
 			return new Promise((done, fail) => {

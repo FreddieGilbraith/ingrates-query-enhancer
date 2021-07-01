@@ -1,7 +1,7 @@
 import test from "ava";
 import { createActorSystem } from "@little-bonsai/ingrates";
 
-import queryEnhancer, { QueryActor } from "../src/index.js";
+import { queryEnhancer, QueryActor } from "../src/index.js";
 
 test.beforeEach((t) => {
 	t.context.system = createActorSystem({

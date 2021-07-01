@@ -1,50 +1,46 @@
 {
+	"type": "module",
 	"name": "@little-bonsai/ingrates-query-enhancer",
 	"version": "0.1.2",
-	"sideEffects": false,
-	"description": "An ingrates enhancer to provide queries to actors",
-	"homepage": "https://ingrates.littlebonsai.co.uk/",
-	"license": "ISC",
-	"author": "",
+	"description": "Perform an async query",
+	"main": "dist/index.js",
+	"scripts": {
+		"test": "ava",
+		"build": "microbundle --jsx React.createElement",
+		"watch": "microbundle watch --jsx React.createElement",
+		"format": "prettier --write src/**/*",
+		"lint": "eslint . && prettier --check src/**/*",
+		"prepushOnly": "npm run format && npm run test && npm run build",
+		"prepublishOnly": "npm run format && npm run test && npm run build"
+	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/FreddieGilbraith/ingrates-query-enhancer.git"
+		"url": "git+https://github.com/FreddieGilbraith/ingrates-query-enhancer.git"
 	},
+	"keywords": [
+		"ingrates"
+	],
+	"author": "Freddie Gilbraith <freddie.gilbraith@littlebonsai.co.uk>",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/FreddieGilbraith/ingrates-query-enhancer/issues"
+	},
+	"homepage": "https://github.com/FreddieGilbraith/ingrates-query-enhancer#readme",
+	"private": false,
+	"sideEffects": false,
 	"source": "src/index.js",
-	"main": "dist/index.js",
 	"module": "dist/index.module.js",
 	"unpkg": "dist/index.umd.js",
 	"exports": "./dist/index.modern.js",
-	"keywords": [
-		"actor",
-		"actors",
-		"browser",
-		"node",
-		"isomorphic"
-	],
 	"files": [
-		"dist",
-		"src"
+		"/src",
+		"/dist",
+		"/README.md"
 	],
-	"scripts": {
-		"build": "microbundle",
-		"format": "prettier --write src/**/*",
-		"lint": "eslint . && prettier --check **/*.{css,js,md,json}",
-		"prepublishOnly": "npm run build",
-		"prepushOnly": "npm run format && && npm run test && npm run build",
-		"test": "NODE_ENV=test jest --coverage true src test",
-		"test:watch": "NODE_ENV=test jest src test --watch --bail --runInBand",
-		"watch": "microbundle watch"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged",
-			"pre-push": "npm run lint"
-		}
-	},
-	"lint-staged": {
-		"**/*.js": "eslint --fix",
-		"**/*.{css,js,md,json}": "prettier --write"
+	"babel": {
+		"presets": [
+			"@babel/preset-env"
+		]
 	},
 	"eslintConfig": {
 		"extends": "@little-bonsai"
@@ -65,35 +61,30 @@
 			}
 		]
 	},
-	"babel": {
-		"presets": [
-			"@babel/preset-env"
-		]
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged",
+			"pre-push": "npm run lint"
+		}
+	},
+	"lint-staged": {
+		"**/*.js": "eslint --fix",
+		"**/*.{md,js,json}": "prettier --write"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.12.1",
-		"@babel/core": "^7.12.3",
-		"@babel/preset-env": "^7.12.1",
+		"@babel/cli": "^7.14.5",
+		"@babel/core": "^7.14.6",
+		"@babel/preset-env": "^7.14.7",
 		"@little-bonsai/eslint-config": "^0.1.0",
+		"@little-bonsai/ingrates": "^0.8.0",
+		"ava": "^3.15.0",
 		"babel-eslint": "^10.1.0",
-		"babel-jest": "^26.6.2",
 		"babel-polyfill": "^6.26.0",
 		"babel-preset-minify": "^0.5.1",
-		"eslint": "^7.12.1",
-		"eslint-config-react-app": "^6.0.0",
-		"eslint-plugin-flowtype": "^5.2.0",
-		"eslint-plugin-import": "^2.22.1",
-		"eslint-plugin-jsx-a11y": "^6.4.1",
-		"eslint-plugin-react": "^7.21.5",
-		"eslint-plugin-react-hooks": "^4.2.0",
-		"husky": "^4.3.8",
-		"jest-cli": "^26.6.2",
-		"lint-staged": "^10.5.3",
-		"microbundle": "^0.12.4",
-		"prettier": "^2.1.2",
-		"ramda": "^0.27.1"
-	},
-	"peerDependencies": {
-		"@little-bonsai/ingrates": "^0.7.0"
+		"eslint": "^7.29.0",
+		"husky": "^6.0.0",
+		"lint-staged": "^11.0.0",
+		"microbundle": "^0.13.3",
+		"prettier": "^2.3.1"
 	}
 }

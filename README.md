@@ -1,16 +1,23 @@
-# Ingrates Query Enhancer
+# Ingrates Assert Enhancer
 
-> Add `query` to ingrates actors
-
-`query` allows you to await a response from an actor. The promise will reject if a timeout is reached
+> Provide an `assert` function, to quickly sanity check actors
 
 ```javascript
-import queryEnhancer from "@little-bonsai/ingrates-query-enhancer";
+import { createActorSystem } from "@little-bonsai/ingrates";
+import assertEnhancer from "@little-bonsai/ingrates-assert-enhancer";
 
-async function* ExampleActor({ spawn, query }) {
-  const child = spawn(ChildActor);
-  const response = await query(child, { type: "REQUEST_DATA" });
+const system = createActorSystem({
+  enhancers: [assertEnhancer],
+});
+
+function LogActor({ msg, assert, dispatch }) {
+  assert(msg.value > 0, "Value must be greater than 0");
+
+  dispatch(msg.src, { valueLog: Math.log(msg.value) });
 }
 
-createActorSystem({ enhancers: [queryEnhancer] })(ExampleActor);
+system.register(LogActor);
+system.dispatch(system.spawn.logarithm(LogActor), {
+  value: -1,
+});
 ```

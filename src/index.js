@@ -1,28 +1,49 @@
-export default function queryEnhancer({ spawn }) {
-	function query(snk, msg, timeout = 100) {
-		return new Promise((done, fail) => {
-			function* QueryActor({ self, dispatch }) {
-				dispatch(snk, msg);
+import fixedId from "fixed-id";
+
+const customErrorName = "IngratesQueryError";
+
+class IngratesQueryError extends Error {
+	constructor(self, name, msg, snk) {
+		const message = `${customErrorName}: [${self} | ${name} => ${snk}] ${JSON.stringify(
+			msg,
+		)}`;
+
+		super(message);
+
+		if (Error.captureStackTrace) {
+			Error.captureStackTrace(this, IngratesQueryError);
+		}
+
+		this.name = customErrorName;
+		this.actorInfo = { self, name, msg };
+		this.snk = snk;
+	}
+}
+
+export function QueryActor({ msg }, sendTo, sendMsg, done) {
+	done(msg);
+}
+
+QueryActor.startup = ({ dispatch }, sendTo, msg) => {
+	dispatch(sendTo, msg);
+};
+
+export default function createQueryEnhancer(defaultTimeout = 5000) {
+	return function queryEnhancer({ spawn, self, name }) {
+		function query(snk, msg, timeout = defaultTimeout) {
+			return new Promise((done, fail) => {
+				spawn[`queryActor(${fixedId()})`](QueryActor, snk, msg, done);
 
 				setTimeout(
-					dispatch.bind(null, self, { type: "TIMEOUT" }),
+					fail,
 					timeout,
+					new IngratesQueryError(self, name, msg, snk),
 				);
+			});
+		}
 
-				const response = yield;
-
-				if (response.type === "TIMEOUT") {
-					fail({ type: "QUERY_TIMEOUT", timeout });
-				} else {
-					done(response);
-				}
-			}
-
-			spawn(QueryActor);
-		});
-	}
-
-	return {
-		query,
+		return {
+			query,
+		};
 	};
 }

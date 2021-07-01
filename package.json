@@ -1,7 +1,7 @@
 {
 	"type": "module",
 	"name": "@little-bonsai/ingrates-query-enhancer",
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"description": "Perform an async query",
 	"main": "dist/index.js",
 	"scripts": {

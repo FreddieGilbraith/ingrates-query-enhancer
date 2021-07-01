@@ -1,11 +1,11 @@
 import test from "ava";
 import { createActorSystem } from "@little-bonsai/ingrates";
 
-import { queryEnhancer, QueryActor } from "../src/index.js";
+import { createQueryEnhancer, QueryActor } from "../src/index.js";
 
 test.beforeEach((t) => {
 	t.context.system = createActorSystem({
-		enhancers: [queryEnhancer()],
+		enhancers: [createQueryEnhancer()],
 	});
 
 	t.context.system.register(QueryActor);

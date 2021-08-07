@@ -20,13 +20,20 @@ class IngratesQueryError extends Error {
 	}
 }
 
-export function QueryActor({ msg }, sendTo, sendMsg, done) {
-	done(msg);
+export function QueryActor({ msg, dispatch }, sendTo, sendMsg, done) {
+	switch (msg.type) {
+		case "Start": {
+			dispatch(sendTo, sendMsg);
+			return;
+		}
+		case "Mount": {
+			return;
+		}
+		default: {
+			done(msg);
+		}
+	}
 }
-
-QueryActor.startup = ({ dispatch }, sendTo, msg) => {
-	dispatch(sendTo, msg);
-};
 
 export function createQueryEnhancer(defaultTimeout = 5000) {
 	return function queryEnhancer({ spawn, self, name }) {

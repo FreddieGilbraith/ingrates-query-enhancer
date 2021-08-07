@@ -14,22 +14,27 @@ test.beforeEach((t) => {
 test("can directly query an actor", (t) =>
 	new Promise((done) => {
 		function Child({ msg, dispatch }) {
-			dispatch(msg.src, { valueDoubled: msg.value * 2 });
+			if (msg.type === "PleaseDouble") {
+				dispatch(msg.src, { valueDoubled: msg.value * 2 });
+			}
 		}
 
-		async function Parent() {}
+		async function Parent({ msg, query, spawn }) {
+			if (msg.type === "Start") {
+				const addr = spawn.child(Child);
+				const reply = await query(addr, {
+					type: "PleaseDouble",
+					value: 2,
+				});
 
-		Parent.startup = async ({ query, spawn }) => {
-			const addr = spawn.child(Child);
-			const reply = await query(addr, { value: 2 });
+				t.like(reply, {
+					src: addr,
+					valueDoubled: 4,
+				});
 
-			t.like(reply, {
-				src: addr,
-				valueDoubled: 4,
-			});
-
-			done();
-		};
+				done();
+			}
+		}
 
 		t.context.system.register(Child);
 		t.context.system.register(Parent);
